@@ -52,6 +52,10 @@
             'value' => 'checkbox',
             'label' => 'Checkbox',
         ],
+        [
+            'value' => 'multiple_checkbox',
+            'label' => 'Multiple Checkbox',
+        ],
     ],
 ])
 
@@ -177,6 +181,22 @@
         'name'           => 'checkboxLabel',
         'label'          => 'Checkbox Label',
         'note'           => 'Will be displayed next to the checkbox',
+        'type'           => 'text',
+        'required'       => false,
+        'translated'     => true,
+    ])
+@endcomponent
+
+@component('twill::partials.form.utils._connected_fields', [
+    'fieldName'       => 'type',
+    'fieldValues'     => 'multiple_checkbox',
+    'renderForBlocks' => true,
+])
+    @formField('input', [
+        'name'           => 'multiple_checkboxLabel',
+        'label'          => 'Multiple Checkbox Label',
+        'note'           => 'Will be displayed next to the checkbox',
+        'placeholder'    => 'ex: checkbox one; checkbox two',
         'type'           => 'text',
         'required'       => false,
         'translated'     => true,
