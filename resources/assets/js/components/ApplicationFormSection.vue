@@ -53,15 +53,18 @@
                 </template>
 
                 <template v-else-if="field.type == 'multiple_checkbox'">
-                    <b-checkbox
-                        v-for="(item, i) in field.multiple_checkboxLabel.split(';')" :key="i"
-                        class="is-flex multi-checkbox"
-                        size="is-small"
-                        :required="field.required"
-                        :true-value="1"
-                        :false-value="0">
-                        {{ item }}
-                    </b-checkbox>
+                    <b-field
+                        :grouped="true"
+                    >
+                        <b-checkbox
+                            class="is-flex multi-checkbox"
+                            size="is-small"
+                            :true-value="item"
+                            :false-value="''">
+                            {{ field.multiple_checkboxLabel}}
+                        </b-checkbox>
+                    </b-field>
+
                 </template>
 
                 <template v-else-if="field.type == 'number'">

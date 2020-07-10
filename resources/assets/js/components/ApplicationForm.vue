@@ -82,15 +82,18 @@
 
                     <template v-else-if="field.type == 'multiple_checkbox'">
                         <b-field
-                            v-for="(item, i) in field.multiple_checkboxLabel.split(';')" :key="i"
+                            v-for="(item, i) in field.multiple_checkboxLabel" :key="i"
+                            :grouped="true"
                         >
                             <b-checkbox
                                 class="is-flex multi-checkbox"
                                 size="is-small"
-
                                 v-model="models[sectionIndex][fieldIndex].value"
-                                :true-value="1"
-                                :false-value="0">
+                                :value="models[sectionIndex][fieldIndex].value"
+                                :true-value="item"
+                                :false-value="''"
+                                :id="i"
+                            >
                                 {{item}}
                             </b-checkbox>
                         </b-field>
@@ -171,6 +174,12 @@
                         errors[sectionIndex] = [];
                     }
 
+                    // if(field.type == 'multiple_checkbox'){
+                    //     models[sectionIndex][fieldIndex] = {
+                    //         value: checkList
+                    //     }
+                    // }
+
                     models[sectionIndex][fieldIndex] = {
                         label: field.label,
                         value: '',
@@ -204,6 +213,7 @@
                 dateFields: dateFields,
                 fileFields: fileFields,
                 submitted: false,
+                checkList: []
             };
         },
         computed: {
@@ -303,6 +313,8 @@
             });
 
             this.restoreFromLocalStorage();
+
+            this.checkList.push(models[sectionIndex][fieldIndex].value)
         },
         created() {
             this.debouncedSaveToLocalStorage = utils.debounce(this.saveToLocalStorage, 1000);

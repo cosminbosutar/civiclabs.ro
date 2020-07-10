@@ -101,8 +101,8 @@ function getFormFieldParams($field)
             break;
 
         case 'multiple_checkbox':
-            $config['validation'][] = 'boolean';
-            $config['multiple_checkboxLabel'] = $field->translatedinput('multiple_checkboxLabel');
+            $config['validation'][] = 'string';
+            $config['multiple_checkboxLabel'] = explode(';', $field->translatedinput('multiple_checkboxLabel'));
             break;
 
         default:
